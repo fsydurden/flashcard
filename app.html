@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleAnki - Flashcards</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>SimpleAnki</h1>
+            <div class="user-menu">
+                <span id="user-name">User</span>
+                <button id="logout-btn" class="btn btn-small">Logout</button>
+            </div>
+        </header>
+        
+        <div class="app-content">
+            <nav class="app-nav">
+                <button id="decks-nav" class="nav-btn active">Decks</button>
+                <button id="add-nav" class="nav-btn">Add Card</button>
+                <button id="stats-nav" class="nav-btn">Stats</button>
+                <button id="settings-nav" class="nav-btn">Settings</button>
+            </nav>
+            
+            <main class="main-content">
+                <div id="decks-screen" class="screen active">
+                    <h2>Your Decks</h2>
+                    <ul class="deck-list" id="deck-list">
+                        <!-- Decks will be inserted here -->
+                    </ul>
+                    <button id="add-deck-btn" class="btn btn-primary">Create New Deck</button>
+                    
+                    <div id="add-deck-form" class="form-modal">
+                        <div class="form-container">
+                            <h3>Create New Deck</h3>
+                            <div class="form-group">
+                                <label for="deck-name">Deck Name:</label>
+                                <input type="text" id="deck-name" placeholder="Enter deck name">
+                            </div>
+                            <div class="form-buttons">
+                                <button id="cancel-deck-btn" class="btn btn-secondary">Cancel</button>
+                                <button id="save-deck-btn" class="btn btn-primary">Save Deck</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="add-screen" class="screen">
+                    <h2>Add New Card</h2>
+                    <div class="form-group">
+                        <label for="card-deck">Deck:</label>
+                        <select id="card-deck" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-front">Front (Question):</label>
+                        <textarea id="card-front" placeholder="Enter question or front of card" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-back">Back (Answer):</label>
+                        <textarea id="card-back" placeholder="Enter answer or back of card" required></textarea>
+                    </div>
+                    <button id="save-card-btn" class="btn btn-primary">Save Card</button>
+                </div>
+                
+                <div id="study-screen" class="screen">
+                    <h2 id="study-deck-title">Studying: Default Deck</h2>
+                    <div class="card-container">
+                        <div class="flashcard">
+                            <div id="card-content" class="card-front"></div>
+                        </div>
+                        <button id="flip-btn" class="btn btn-secondary">Show Answer</button>
+                        <div class="rating-buttons">
+                            <button class="rating-btn again" data-rating="1">Again</button>
+                            <button class="rating-btn hard" data-rating="2">Hard</button>
+                            <button class="rating-btn good" data-rating="3">Good</button>
+                            <button class="rating-btn easy" data-rating="4">Easy</button>
+                        </div>
+                        <div class="study-stats">
+                            <p>Cards left: <span id="cards-left">0</span></p>
+                            <p>New: <span id="new-count">0</span> | Learning: <span id="learning-count">0</span> | Review: <span id="review-count">0</span></p>
+                        </div>
+                        <button id="finish-btn" class="btn btn-primary">Finish Study Session</button>
+                    </div>
+                </div>
+                
+                <div id="stats-screen" class="screen">
+                    <h2>Your Study Statistics</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-cards">0</div>
+                            <div class="stat-label">Total Cards</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="studied-today">0</div>
+                            <div class="stat-label">Studied Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-sessions">0</div>
+                            <div class="stat-label">Total Sessions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="avg-retention">0%</div>
+                            <div class="stat-label">Retention Rate</div>
+                        </div>
+                    </div>
+                    <div class="stats-chart-container">
+                        <h3>Study Activity (Last 7 Days)</h3>
+                        <canvas id="activity-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="settings-screen" class="screen">
+                    <h2>Account Settings</h2>
+                    <div class="settings-section">
+                        <h3>Profile</h3>
+                        <div class="form-group">
+                            <label for="settings-name">Display Name:</label>
+                            <input type="text" id="settings-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-email">Email Address:</label>
+                            <input type="email" id="settings-email" disabled>
+                        </div>
+                        <button id="update-profile-btn" class="btn btn-primary">Update Profile</button>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <label for="current-password">Current Password:</label>
+                            <input type="password" id="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password:</label>
+                            <input type="password" id="new-password" minlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password:</label>
+                            <input type="password" id="confirm-password">
+                        </div>
+                        <button id="change-password-btn" class="btn btn-primary">Change Password</button>
+                    </div>
+                    
+                    <div class="settings-section danger-zone">
+                        <h3>Danger Zone</h3>
+                        <p>This action cannot be undone. This will permanently delete your account and all your data.</p>
+                        <button id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

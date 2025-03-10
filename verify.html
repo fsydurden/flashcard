@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleAnki - Verify Email</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container auth-container">
+        <h1>SimpleAnki</h1>
+        <div class="auth-card">
+            <h2>Verify Your Email</h2>
+            <div id="verification-message">
+                <p>We've sent a verification code to your email address.</p>
+                <p>Please enter the 6-digit code below to verify your account.</p>
+            </div>
+            <div id="verification-error" class="error-message"></div>
+            <form id="verification-form">
+                <div class="form-group verification-code">
+                    <input type="text" maxlength="1" class="code-input" required>
+                    <input type="text" maxlength="1" class="code-input" required>
+                    <input type="text" maxlength="1" class="code-input" required>
+                    <input type="text" maxlength="1" class="code-input" required>
+                    <input type="text" maxlength="1" class="code-input" required>
+                    <input type="text" maxlength="1" class="code-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Verify Email</button>
+            </form>
+            <div class="auth-footer">
+                <p>Didn't receive a code? <a href="#" id="resend-code">Resend Code</a></p>
+                <p><a href="login.html">Back to Login</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/verify.js"></script>
+</body>
+</html>
